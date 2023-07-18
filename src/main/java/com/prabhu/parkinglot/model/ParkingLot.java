@@ -1,9 +1,14 @@
 package com.prabhu.parkinglot.model;
 
+import com.prabhu.parkinglot.service.ParkingLotServiceImpl;
 import java.util.HashMap;
 import java.util.Map;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ParkingLot {
+
+  private static final Logger logger = LoggerFactory.getLogger(ParkingLot.class);
 
   private Map<Integer, Car> directory;
   private int capacity;
@@ -17,18 +22,26 @@ public class ParkingLot {
     if (directory.size() >= capacity) {
       throw new IllegalStateException("Parking lot is full");
     }
+
+    if (directory.containsKey(spot)) {
+      throw new IllegalStateException("Spot is already in use !");
+    }
+
+    if (spot > capacity) {
+      throw new IllegalStateException("Invalid Spot!");
+    }
+
     directory.put(spot, car);
   }
 
   public void removeCar(int spot) {
-    System.out.println("\nRemoving car from spot : " + spot);
+    logger.info("Removing car from spot : {}", spot);
     directory.remove(spot);
   }
 
   public void printDirectory() {
     for (Map.Entry<Integer, Car> entry : directory.entrySet()) {
-      System.out.println(
-          "Spot: " + entry.getKey() + ", Car: " + entry.getValue().getCharacteristics());
+      logger.info("Spot: {}, Car: {}", entry.getKey(), entry.getValue().getCharacteristics());
     }
   }
 }

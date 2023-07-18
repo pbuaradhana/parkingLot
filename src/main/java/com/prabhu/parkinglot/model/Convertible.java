@@ -1,6 +1,10 @@
 package com.prabhu.parkinglot.model;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class Convertible extends Car {
+  private static final Logger logger = LoggerFactory.getLogger(Convertible.class);
   private boolean roofUp;
 
   public Convertible(String name, int numberOfSeats, String productionNumber, Engine engine) {
@@ -10,6 +14,6 @@ public class Convertible extends Car {
 
   public void moveRoof() {
     roofUp = !roofUp;
-    System.out.println("Roof " + (roofUp ? "up" : "down"));
+    logger.info("Roof {}", (roofUp ? "up" : "down"));
   }
 }
