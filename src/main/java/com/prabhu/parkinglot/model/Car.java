@@ -4,7 +4,7 @@ import com.prabhu.parkinglot.model.Engine;
 import lombok.Data;
 
 @Data
-public class Car {
+public class Car extends Vehicle {
   private String name;
   private int numberOfSeats;
   private double currentSpeed;
@@ -12,6 +12,7 @@ public class Car {
   private Engine engine;
 
   public Car(String name, int numberOfSeats, String productionNumber, Engine engine) {
+    super(productionNumber);
     this.name = name;
     this.numberOfSeats = numberOfSeats;
     this.productionNumber = productionNumber;
@@ -25,5 +26,13 @@ public class Car {
 
   public String getCharacteristics() {
     return "Name: " + name + ", Production Number: " + productionNumber + ", Horsepower: " + engine.getHorsepower();
+  }
+
+  public Car(String licensePlate) {
+    super(licensePlate);
+  }
+  @Override
+  public VehicleType getType() {
+    return VehicleType.CAR;
   }
 }

@@ -3,6 +3,7 @@ package com.prabhu.parkinglot.service;
 import com.prabhu.parkinglot.model.Car;
 import com.prabhu.parkinglot.model.Convertible;
 import com.prabhu.parkinglot.model.Engine;
+import com.prabhu.parkinglot.model.Motorcycle;
 import com.prabhu.parkinglot.model.ParkingLot;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,22 +25,37 @@ public class ParkingLotServiceImpl {
   }
 
   public void park() {
-    ParkingLot parkingLot = new ParkingLot(3);
-    try {
-      parkingLot.parkCar(1, boxster);
-      parkingLot.parkCar(2, prius);
-      parkingLot.parkCar(3, new Car("Car 1", 4, "1111", new Engine(200, 30)));
-      // The following line will throw an exception since the parking lot is already at full capacity
-      parkingLot.parkCar(4, new Car("Car 2", 3, "2222", new Engine(180, 35)));
-    } catch (IllegalStateException e) {
-      logger.warn(e.getMessage());
-      parkingLot.printDirectory();
-    }
+//    ParkingLot parkingLot = new ParkingLot(3);
+//    try {
+//      parkingLot.parkCar(1, boxster);
+//      parkingLot.parkCar(2, prius);
+//      parkingLot.parkCar(3, new Car("Car 1", 4, "1111", new Engine(200, 30)));
+//      // The following line will throw an exception since the parking lot is already at full capacity
+//      parkingLot.parkCar(4, new Car("Car 2", 3, "2222", new Engine(180, 35)));
+//    } catch (IllegalStateException e) {
+//      logger.warn(e.getMessage());
+//      parkingLot.printDirectory();
+//    }
+//
+//    parkingLot.removeCar(2);
+//    parkingLot.parkCar(2, new Car("Car 2", 3, "2222", new Engine(180, 35)));
+//
+//    parkingLot.printDirectory();
+    ParkingLot parkingLot = new ParkingLot(10);
 
-    parkingLot.removeCar(2);
-    parkingLot.parkCar(2, new Car("Car 2", 3, "2222", new Engine(180, 35)));
+    Car car1 = new Car("ABC123");
+    Car car2 = new Car("XYZ789");
+    Motorcycle bike1 = new Motorcycle("MOT456");
 
-    parkingLot.printDirectory();
+    parkingLot.parkVehicle(car1);
+    parkingLot.parkVehicle(bike1);
+    parkingLot.parkVehicle(car2);
+
+    parkingLot.displayParkingStatus();
+
+    parkingLot.removeVehicle(bike1);
+
+    parkingLot.displayParkingStatus();
   }
 
   public void raiseAcceleration(Car boxster, Car prius) {
